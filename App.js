@@ -6,6 +6,7 @@ import {Store} from './redux/store';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import 'react-native-gesture-handler';
+import {StatusBar} from 'react-native';
 
 const Stack = createStackNavigator();
 
@@ -20,8 +21,20 @@ const App = () => {
             headerTintColor: 'white',
             headerStyle: {backgroundColor: '#28C8FF'},
           }}>
-          <Stack.Screen name="Head" component={Head} />
-          <Stack.Screen name="Woods" component={Woods} />
+          <Stack.Screen
+            options={{
+              headerShown: false,
+            }}
+            name="Head"
+            component={Head}
+          />
+          <Stack.Screen
+            options={{
+              title: "Yog'ochlar",
+            }}
+            name="Woods"
+            component={Woods}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

@@ -1,24 +1,32 @@
-import { CALCULATE, CALCULATE_ERR } from "./action";
+import {CALCULATE, CALCULATE_ERR, DELETE} from './action';
 
-export const calculateReducer = (state = {},action) => {
+const initial = {
+  woods: [],
+};
+
+export const calculateReducer = (state = initial, action) => {
   switch (action.type) {
     case CALCULATE:
       return {
         ...state,
-        volume: action.payload.volume,
-        summ:action.payload.summ,
-        num:action.payload.num
-      }
+        woods: [action.payload, ...state.woods],
+      };
     case CALCULATE_ERR:
-      return{
-      ...state,
-      volume:[],
-      err:action.payload
-    }
-  
-    default: 
       return {
-        state
-      }
+        ...state,
+        err: action.payload,
+      };
+    case DELETE:
+      let woods = state.woods;
+      woods.splice(action.payload, 1);
+      return {
+        ...state,
+        woods,
+      };
+
+    default:
+      return {
+        ...state,
+      };
   }
-}
+};
